@@ -29,6 +29,12 @@ const contactSchema = new Schema({
     type: Boolean,
     default: false,
     required: false
+  },
+  groups: {
+    ref : 'groups',
+    type: Array,
+    default: [],
+    required: false
   }
 })
 
