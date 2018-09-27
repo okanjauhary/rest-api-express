@@ -6,12 +6,10 @@ const groupsSchema = new Schema({
     type: String,
     required: true
   },
-  users: {
-    ref : 'users',
-    type: Array,
-    default: [],
-    required: false
-  }
+  contacts: [{
+    type: Schema.Types.ObjectId,
+    ref : 'contacts'
+  }]
 })
 
 const Group = mongoose.model('groups', groupsSchema)

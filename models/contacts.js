@@ -30,12 +30,10 @@ const contactSchema = new Schema({
     default: false,
     required: false
   },
-  groups: {
-    ref : 'groups',
-    type: Array,
-    default: [],
-    required: false
-  }
+  groups: [{
+    type: Schema.Types.ObjectId,
+    ref : 'groups'
+  }]
 })
 
 const Contact = mongoose.model('contacts', contactSchema)
