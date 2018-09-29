@@ -49,7 +49,11 @@ router.put('/contacts/:id', (req, res) => {
 router.delete('/contacts/:id', (req, res) => {
   Contacts.findOneAndRemove({_id: req.params.id})
   .then(contactDeleted => {
-    res.send({success: true, message: `${contactDeleted.name} has been deleted`})
+    contactDeleted.groups.forEach(group_id => {
+      Groups.findOneAndUpdate({_id: group_id}, {$pull: {contacts: contactDeleted._id}})
+      .then(success => res.status(200))
+    })
+    res.send(contactDeleted)
   })
   .catch((err) => {
       res.status(500).send(err)
