@@ -33,8 +33,17 @@ router.post('/contacts', (req, res, next) => {
 })
 
 router.put('/contacts/:id', (req, res) => {
-  Contacts.findOneAndUpdate({_id: req.params.id}, req.body)
-    .then(result => res.status(200).send(result))
+  Contacts
+    .findOneAndUpdate(
+      {_id: req.params.id},
+      {$set: req.body},
+      {new: true},
+      (err, result) => {
+          if(err) return res.send(err)
+
+          return res.send(result)
+      }
+    )
 })
 
 router.delete('/contacts/:id', (req, res) => {
