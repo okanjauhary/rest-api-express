@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const router = express.Router()
 const Contacts = require('./../models/contacts');
 const Groups = require('./../models/groups');
+const Auth = require('../lib/helpers')
 
 router.get('/contacts', (req, res) => {
   Contacts
